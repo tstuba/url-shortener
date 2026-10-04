@@ -1,0 +1,36 @@
+services:
+  db:
+    container_name: db
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
+      - POSTGRES_DB=${POSTGRES_DB:-db}
+    networks:
+      - app-network
+  app:
+    ports:
+      - 8000:8000
+    build:
+      dockerfile: ./Dockerfile
+    environment:
+      - DB_HOST=${POSTGRES_HOST:-db}
+      - DB_PORT=${POSTGRES_PORT:-5432}
+      - DB_USER_NAME=${POSTGRES_USER:-admin}
+      - DB_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
+      - DB_NAME=${POSTGRES_DB:-db}
+    volumes:
+      - ./src/:/app/src/
+      - ./migrations:/app/migrations
+      - ./alembic.ini:/app/alembic.ini
+      - ./pyproject.toml:/app/pyproject.toml
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

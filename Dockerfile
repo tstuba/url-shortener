@@ -4,6 +4,8 @@ FROM python:3.14-slim
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 ENV UV_PROJECT_ENVIRONMENT=/usr/local/
 
+ENV PYTHONPATH=/app/src
+
 # Change the workdir directory to the 'app' directory 
 WORKDIR /app
 ARG UV_SYNC_ARGS=--no-dev

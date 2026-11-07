@@ -5,7 +5,7 @@ from sqlalchemy import DateTime, String, Text, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
-from url_shortener.db import Base
+from url_shortener.models.base import Base
 
 
 class Url(Base):

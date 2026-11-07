@@ -32,11 +32,11 @@ start-detached:
 	@echo "Starting Docker container..."
 	docker compose up -d
 
-stop-backend:
+stop-app:
 	@echo "Stopping App container..."
 	docker compose stop app
 
-start-dev-backend:
+start-dev-app:
 	@echo "Starting Database..."
 	docker compose up -d db
 	@echo "Running App in development mode..."

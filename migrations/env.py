@@ -6,8 +6,8 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from src.url_shortener.db import Base
-from src.url_shortener.settings import settings
+from url_shortener.models import Base
+from url_shortener.settings import settings
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

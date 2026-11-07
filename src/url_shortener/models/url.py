@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, String, Text, func
+from sqlalchemy import DateTime, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -11,6 +11,13 @@ from url_shortener.models.base import Base
 class Url(Base):
     __tablename__ = "urls"
 
+    __table_args__ = (
+        UniqueConstraint(
+            "short_code",
+            name="uq_urls_short_code",
+        ),
+    )
+
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
         primary_key=True,
@@ -19,7 +26,6 @@ class Url(Base):
 
     short_code: Mapped[str] = mapped_column(
         String(16),
-        unique=True,
         index=True,
         nullable=False,
     )

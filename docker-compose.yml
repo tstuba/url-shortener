@@ -16,12 +16,18 @@ services:
     build:
       dockerfile: ./Dockerfile
     environment:
+      # DATABASE ENVS
       - DB_HOST=${POSTGRES_HOST:-db}
       - DB_PORT=${POSTGRES_PORT:-5432}
       - DB_USER_NAME=${POSTGRES_USER:-admin}
       - DB_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
       - DB_NAME=${POSTGRES_DB:-db}
+      
+      # APP ENVS
+      - DEBUG=${DEBUG:-True}
       - PUBLIC_BASE_URL=${PUBLIC_BASE_URL:-http://localhost:8000}
+      - URL_TTL_DAYS=${URL_TTL_DAYS:-7}
+      - SHORT_CODE_MAX_RETRIES=${SHORT_CODE_MAX_RETRIES:-3}
     volumes:
       - ./src/:/app/src/
       - ./migrations:/app/migrations

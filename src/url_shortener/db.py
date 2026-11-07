@@ -9,7 +9,7 @@ from url_shortener.settings import settings
 
 DATABASE_URL = settings.database_url
 
-engine: AsyncEngine = create_async_engine(DATABASE_URL, echo=True)
+engine: AsyncEngine = create_async_engine(DATABASE_URL, echo=settings.debug)
 
 SessionFactory: async_sessionmaker[AsyncSession] = async_sessionmaker(
     bind=engine, class_=AsyncSession, expire_on_commit=False

@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class AppSettings(BaseSettings):
-    pass
+    public_base_url: str
 
 
 class DataBaseSettings(BaseSettings):
@@ -17,7 +17,11 @@ class DataBaseSettings(BaseSettings):
         return f"postgresql+asyncpg://{self.db_user_name}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
 
 
-class Settings(AppSettings, DataBaseSettings):
+class UrlSettings(BaseSettings):
+    url_ttl_days: int = 30
+
+
+class Settings(AppSettings, DataBaseSettings, UrlSettings):
     pass
 
 

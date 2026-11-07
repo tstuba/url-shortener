@@ -21,6 +21,7 @@ services:
       - DB_USER_NAME=${POSTGRES_USER:-admin}
       - DB_PASSWORD=${POSTGRES_PASSWORD:-qwerty}
       - DB_NAME=${POSTGRES_DB:-db}
+      - PUBLIC_BASE_URL=${PUBLIC_BASE_URL:-http://localhost:8000}
     volumes:
       - ./src/:/app/src/
       - ./migrations:/app/migrations

@@ -11,6 +11,6 @@ DATABASE_URL = settings.database_url
 
 engine: AsyncEngine = create_async_engine(DATABASE_URL, echo=True)
 
-AsyncSessionLocal: async_sessionmaker[AsyncSession] = async_sessionmaker(
+SessionFactory: async_sessionmaker[AsyncSession] = async_sessionmaker(
     bind=engine, class_=AsyncSession, expire_on_commit=False
 )
